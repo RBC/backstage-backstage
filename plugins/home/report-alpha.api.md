@@ -53,7 +53,7 @@ const _default: FrontendPlugin<
       >;
       inputs: {};
       params: {
-        element: JSX.Element | (() => JSX.Element);
+        element: JSX.Element;
       };
     }>;
     'page:home': ExtensionDefinition<{
@@ -98,7 +98,8 @@ const _default: FrontendPlugin<
       kind: 'page';
       name: undefined;
       params: {
-        defaultPath: string;
+        defaultPath?: [Error: `Use the 'path' param instead`];
+        path: string;
         loader: () => Promise<JSX.Element>;
         routeRef?: RouteRef;
       };
