@@ -823,7 +823,10 @@ export function createRouteRef<
     | undefined = undefined,
   TParamKeys extends string = string,
 >(config?: {
-  readonly params: string extends TParamKeys ? (keyof TParams)[] : TParamKeys[];
+  readonly params?: string extends TParamKeys
+    ? (keyof TParams)[]
+    : TParamKeys[];
+  aliasFor?: string;
 }): RouteRef<
   keyof TParams extends never
     ? undefined
@@ -1096,7 +1099,6 @@ export interface ExtensionBoundaryProps {
   children: ReactNode;
   // (undocumented)
   node: AppNode;
-  routable?: boolean;
 }
 
 // @public (undocumented)
@@ -1765,17 +1767,14 @@ export interface RouteResolutionApi {
       | RouteRef<TParams>
       | SubRouteRef<TParams>
       | ExternalRouteRef<TParams>,
-    options?: RouteResolutionApiResolveOptions,
+    options?: {
+      sourcePath?: string;
+    },
   ): RouteFunc<TParams> | undefined;
 }
 
 // @public
 export const routeResolutionApiRef: ApiRef<RouteResolutionApi>;
-
-// @public (undocumented)
-export type RouteResolutionApiResolveOptions = {
-  sourcePath?: string;
-};
 
 export { SessionApi };
 
