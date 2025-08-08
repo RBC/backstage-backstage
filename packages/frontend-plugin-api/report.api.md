@@ -766,7 +766,8 @@ export function createSwappableComponent<
     TInnerComponentProps,
     TExternalComponentProps
   >,
-): ((props: TExternalComponentProps) => JSX.Element | null) & {
+): {
+  (props: TExternalComponentProps): JSX.Element | null;
   ref: SwappableComponentRef<TInnerComponentProps, TExternalComponentProps>;
 };
 
@@ -833,9 +834,8 @@ export { ErrorApiErrorContext };
 export { errorApiRef };
 
 // @public (undocumented)
-export const ErrorDisplay: ((
-  props: ErrorDisplayProps,
-) => JSX.Element | null) & {
+export const ErrorDisplay: {
+  (props: ErrorDisplayProps): JSX.Element | null;
   ref: SwappableComponentRef<ErrorDisplayProps, ErrorDisplayProps>;
 };
 
@@ -941,7 +941,7 @@ export interface ExtensionBlueprint<
           : T['params'],
         context?: {
           config?: T['config'];
-          inputs?: ResolveInputValueOverrides<NonNullable<T['inputs']>>;
+          inputs?: ResolvedInputValueOverrides<NonNullable<T['inputs']>>;
         },
       ) => ExtensionDataContainer<NonNullable<T['output']>>,
       context: {
@@ -1148,7 +1148,7 @@ export type ExtensionDefinition<
             context?: Expand<
               {
                 config?: T['config'];
-                inputs?: ResolveInputValueOverrides<NonNullable<T['inputs']>>;
+                inputs?: ResolvedInputValueOverrides<NonNullable<T['inputs']>>;
               } & ([T['params']] extends [never]
                 ? {}
                 : {
@@ -1502,9 +1502,8 @@ export const NavItemBlueprint: ExtensionBlueprint<{
 }>;
 
 // @public (undocumented)
-export const NotFoundErrorPage: ((
-  props: NotFoundErrorPageProps,
-) => JSX.Element | null) & {
+export const NotFoundErrorPage: {
+  (props: NotFoundErrorPageProps): JSX.Element | null;
   ref: SwappableComponentRef<NotFoundErrorPageProps, NotFoundErrorPageProps>;
 };
 
@@ -1598,7 +1597,8 @@ export { ProfileInfo };
 export { ProfileInfoApi };
 
 // @public (undocumented)
-export const Progress: ((props: ProgressProps) => JSX.Element | null) & {
+export const Progress: {
+  (props: ProgressProps): JSX.Element | null;
   ref: SwappableComponentRef<ProgressProps, ProgressProps>;
 };
 
@@ -1626,73 +1626,6 @@ export type ResolvedExtensionInputs<
     ? Expand<ResolvedExtensionInput<TInputs[InputName]>>
     : Expand<ResolvedExtensionInput<TInputs[InputName]> | undefined>;
 };
-
-// @public (undocumented)
-export type ResolveInputValueOverrides<
-  TInputs extends {
-    [inputName in string]: ExtensionInput<
-      ExtensionDataRef,
-      {
-        optional: boolean;
-        singleton: boolean;
-      }
-    >;
-  } = {
-    [inputName in string]: ExtensionInput<
-      ExtensionDataRef,
-      {
-        optional: boolean;
-        singleton: boolean;
-      }
-    >;
-  },
-> = Expand<
-  {
-    [KName in keyof TInputs as TInputs[KName] extends ExtensionInput<
-      any,
-      {
-        optional: infer IOptional extends boolean;
-        singleton: boolean;
-      }
-    >
-      ? IOptional extends true
-        ? never
-        : KName
-      : never]: TInputs[KName] extends ExtensionInput<
-      infer IDataRefs,
-      {
-        optional: boolean;
-        singleton: infer ISingleton extends boolean;
-      }
-    >
-      ? ISingleton extends true
-        ? Iterable<ExtensionDataRefToValue<IDataRefs>>
-        : Array<Iterable<ExtensionDataRefToValue<IDataRefs>>>
-      : never;
-  } & {
-    [KName in keyof TInputs as TInputs[KName] extends ExtensionInput<
-      any,
-      {
-        optional: infer IOptional extends boolean;
-        singleton: boolean;
-      }
-    >
-      ? IOptional extends true
-        ? KName
-        : never
-      : never]?: TInputs[KName] extends ExtensionInput<
-      infer IDataRefs,
-      {
-        optional: boolean;
-        singleton: infer ISingleton extends boolean;
-      }
-    >
-      ? ISingleton extends true
-        ? Iterable<ExtensionDataRefToValue<IDataRefs>>
-        : Array<Iterable<ExtensionDataRefToValue<IDataRefs>>>
-      : never;
-  }
->;
 
 // @public
 export type RouteFunc<TParams extends AnyRouteRefParams> = (
