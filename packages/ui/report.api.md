@@ -405,6 +405,13 @@ export const componentDefinitions: {
       readonly content: 'bui-HeaderPageContent';
       readonly tabsWrapper: 'bui-HeaderPageTabsWrapper';
       readonly controls: 'bui-HeaderPageControls';
+      readonly sticky: 'bui-HeaderPageSticky';
+      readonly stickyWrapper: 'bui-HeaderPageStickyWrapper';
+      readonly stickyContent: 'bui-HeaderPageStickyContent';
+      readonly breadcrumbs: 'bui-HeaderPageBreadcrumbs';
+      readonly breadcrumb: 'bui-HeaderPageBreadcrumb';
+      readonly breadcrumbLink: 'bui-HeaderPageBreadcrumbLink';
+      readonly breadcrumbSeparator: 'bui-HeaderPageBreadcrumbSeparator';
     };
   };
   readonly Heading: {
@@ -481,6 +488,9 @@ export const componentDefinitions: {
     readonly classNames: {
       readonly root: 'bui-SearchField';
       readonly clear: 'bui-InputClear';
+    };
+    readonly dataAttributes: {
+      readonly startCollapsed: readonly [true, false];
     };
   };
   readonly Select: {
@@ -978,14 +988,6 @@ export interface GridProps extends SpaceProps {
 export const Header: (props: HeaderProps) => JSX_2.Element;
 
 // @public
-export interface HeaderBreadcrumb {
-  // (undocumented)
-  href: string;
-  // (undocumented)
-  label: string;
-}
-
-// @public
 export interface HeaderMenuItem {
   // (undocumented)
   label: string;
@@ -999,7 +1001,17 @@ export interface HeaderMenuItem {
 export const HeaderPage: (props: HeaderPageProps) => JSX_2.Element;
 
 // @public
+export interface HeaderPageBreadcrumb {
+  // (undocumented)
+  href: string;
+  // (undocumented)
+  label: string;
+}
+
+// @public
 export interface HeaderPageProps {
+  // (undocumented)
+  breadcrumbs?: HeaderPageBreadcrumb[];
   // (undocumented)
   customActions?: React.ReactNode;
   // (undocumented)
@@ -1012,8 +1024,6 @@ export interface HeaderPageProps {
 
 // @public
 export interface HeaderProps {
-  // (undocumented)
-  breadcrumbs?: HeaderBreadcrumb[];
   // (undocumented)
   customActions?: React.ReactNode;
   // (undocumented)
@@ -1453,6 +1463,7 @@ export interface SearchFieldProps
   icon?: ReactNode | false;
   placeholder?: string;
   size?: 'small' | 'medium' | Partial<Record<Breakpoint, 'small' | 'medium'>>;
+  startCollapsed?: boolean;
 }
 
 // @public (undocumented)
