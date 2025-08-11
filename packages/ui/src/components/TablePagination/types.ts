@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-export { Table } from './components/Table';
-export { TableHeader } from './components/TableHeader';
-export { TableBody } from './components/TableBody';
-export { Column } from './components/Column';
-export { Row } from './components/Row';
-export { Cell } from './components/Cell';
-export { CellProfile } from './components/CellProfile';
-export { useTable } from './hooks/useTable';
-
-export type { CellProps, CellProfileProps } from './types';
-export type {
-  UseTableConfig,
-  UseTableResult,
-  UseTablePagination,
-  UseTablePaginationConfig,
-} from './hooks/types';
+/** @public */
+export interface TablePaginationProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  offset?: number;
+  pageSize?: number;
+  setPageSize?: (pageSize: number) => void;
+  setOffset?: (offset: number) => void;
+  rowCount?: number;
+  onNextPage?: () => void;
+  onPreviousPage?: () => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  showPageSizeOptions?: boolean;
+}

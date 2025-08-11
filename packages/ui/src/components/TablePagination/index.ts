@@ -14,19 +14,5 @@
  * limitations under the License.
  */
 
-export { Table } from './components/Table';
-export { TableHeader } from './components/TableHeader';
-export { TableBody } from './components/TableBody';
-export { Column } from './components/Column';
-export { Row } from './components/Row';
-export { Cell } from './components/Cell';
-export { CellProfile } from './components/CellProfile';
-export { useTable } from './hooks/useTable';
-
-export type { CellProps, CellProfileProps } from './types';
-export type {
-  UseTableConfig,
-  UseTableResult,
-  UseTablePagination,
-  UseTablePaginationConfig,
-} from './hooks/types';
+export { TablePagination } from './TablePagination';
+export type { TablePaginationProps } from './types';

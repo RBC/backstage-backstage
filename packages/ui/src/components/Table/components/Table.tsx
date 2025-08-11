@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-export { Table } from './components/Table';
-export { TableHeader } from './components/TableHeader';
-export { TableBody } from './components/TableBody';
-export { Column } from './components/Column';
-export { Row } from './components/Row';
-export { Cell } from './components/Cell';
-export { CellProfile } from './components/CellProfile';
-export { useTable } from './hooks/useTable';
+import { useStyles } from '../../../hooks/useStyles';
+import {
+  Table as ReactAriaTable,
+  type TableProps,
+} from 'react-aria-components';
 
-export type { CellProps, CellProfileProps } from './types';
-export type {
-  UseTableConfig,
-  UseTableResult,
-  UseTablePagination,
-  UseTablePaginationConfig,
-} from './hooks/types';
+/** @public */
+export const Table = (props: TableProps) => {
+  const { classNames } = useStyles('Table');
+
+  return (
+    <ReactAriaTable
+      className={classNames.table}
+      aria-label="Data table"
+      {...props}
+    />
+  );
+};
